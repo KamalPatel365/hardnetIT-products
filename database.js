@@ -3,19 +3,11 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-// const sqlConnection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'hdIT',
-//     password: 'hardnetIT89##',
-//     database: 'hardnetit_cctv_data',
-//     multipleStatements: true
-// });
-
 const sqlConnection = mysql.createConnection({
     host: 'localhost',
-    user: 'id20061231_hdit',
+    user: 'hdIT',
     password: 'hardnetIT89##',
-    database: 'id20061231_hardnetit_cctv_data',
+    database: 'hardnetit_cctv_data',
     multipleStatements: true
 });
 
