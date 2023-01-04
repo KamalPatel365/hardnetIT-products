@@ -91,7 +91,7 @@ exports.findOne = async (req, res) => {
     try{
         await Product.getSingleProduct(req, (err, data) => {
             if(err){
-                res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while creating the Product"});
+                res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while getting single Product"});
             }
             else{
                 res.status(200).send( {product: data});
@@ -121,7 +121,7 @@ exports.updateById = async (req, res) => {
                     });
                 }
                 else{
-                    res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while creating the Product"});
+                    res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while updating the Product"});
                 }
             }
             else{
@@ -139,7 +139,7 @@ exports.retrieveAll = async (req, res)  => {
     try {
 	    await Product.retrieveAllProduct(req, (err, data) => {
             if(err){
-                res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while creating the Product"});
+                res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while retrieve all Product"});
             }
             else{
                 res.status(200).send( {products: data});
