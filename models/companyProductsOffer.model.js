@@ -76,7 +76,6 @@ ProductsOffer.addProductsOffer =  ( productsOffer, next ) =>  new Promise(functi
     });
   }
 
-
   ProductsOffer.getAllOffersForTitle = async (req, result) => {
     let getProductOfferQuery = "";
   
@@ -265,6 +264,48 @@ ProductsOffer.addProductsOffer =  ( productsOffer, next ) =>  new Promise(functi
       else{
         result(null, {msg: "No offer found for passed Product title ID"})
       }
+    });
+  }
+  
+  ProductsOffer.getActiveOffersGroup = async (req, result) => {
+    let getProductOfferQuery = "";
+    
+    await new Promise(() => {
+      getProductOfferQuery = `SELECT company_product_offers.offer_id, company_offer_title.title_id, company_offer_title.header_desc, company_offer_title.validity, company_product_offers.poster_path, company_product_offers.description, product_categories.name AS category FROM company_product_offers LEFT JOIN company_offer_title ON company_product_offers.title_id=company_offer_title.title_id LEFT JOIN product_categories ON product_categories.category_id=company_product_offers.category_id WHERE company_offer_title.validity >= CURRENT_DATE`;
+      
+      sqlConnection.query(getProductOfferQuery, (err, results) => {
+        
+        if(err){
+          result(err, null);
+          return;
+        }
+        if(results !== undefined)
+        {
+          result(null, { ...results })
+        }
+  
+      });
+    });
+  }
+  
+  ProductsOffer.getActiveOffersTitle= async (req, result) => {
+    let getProductOffersTitleQuery = "";
+    
+    await new Promise(() => {
+      getProductOffersTitleQuery = `SELECT * FROM company_offer_title WHERE company_offer_title.validity >= CURRENT_DATE`;
+      
+      sqlConnection.query(getProductOffersTitleQuery, (err, results) => {
+        
+        if(err){
+          result(err, null);
+          return;
+        }
+        if(results !== undefined)
+        {
+          result(null, { ...results })
+        }
+  
+      });
     });
   }
     

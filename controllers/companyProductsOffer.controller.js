@@ -264,6 +264,36 @@ exports.deleteProductOfferById = async (req, res) => {
     }
 }
 
+exports.getActiveOffersGroup = async (req, res) => {
+    try{
+        await ProductsOffer.getActiveOffersGroup(req, (err, data) => {
+            if(err){
+                res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while creating the Product", errorCode: 503});
+            }
+            else{
+                res.status(200).send( {product_offers: data});
+            }
+        });
+    } catch (error) {
+        res.status(403).send({errorMsg: error});
+    }
+}
+
+exports.getActiveOffersTitle = async (req, res) => {
+    try{
+        await ProductsOffer.getActiveOffersTitle(req, (err, data) => {
+            if(err){
+                res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while creating the Product", errorCode: 503});
+            }
+            else{
+                res.status(200).send( {product_offers: data});
+            }
+        });
+    } catch (error) {
+        res.status(403).send({errorMsg: error});
+    }
+}
+
 // exports.retrieveAll = async (req, res)  => {
 //     try {
 // 	    await Product.retrieveAllProduct(req, (err, data) => {

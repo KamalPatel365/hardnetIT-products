@@ -9,6 +9,8 @@ module.exports = app => {
     router.put("/productOffer/title/:titleId/offer/:offerId", productsOffer.updateProductOfferByTitleId);
     router.delete("/productOffer/title/:titleId", productsOffer.deleteProductOfferTitleById);
     router.delete("/productOffer/title/:titleId/offer/:offerId", productsOffer.deleteProductOfferById);
+    router.get("/productOffer/offers", productsOffer.getActiveOffersGroup);
+    router.get("/productOffer/offers/titles", productsOffer.getActiveOffersTitle);
 
     
   app.use('/products', router);
