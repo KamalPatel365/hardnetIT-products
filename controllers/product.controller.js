@@ -142,7 +142,7 @@ exports.retrieveAll = async (req, res)  => {
                 res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while retrieve all Product"});
             }
             else{
-                res.status(200).send( {products: data});
+                res.status(200).send(data);
             }
         });
     } catch (error) {

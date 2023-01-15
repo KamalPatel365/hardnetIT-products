@@ -143,7 +143,7 @@ Product.retrieveAllProduct = (productsReq, result) => {
 
     if(results != undefined)
     {
-      result(null, {...results})
+      result(null, [...results])
     }
   });
 }
