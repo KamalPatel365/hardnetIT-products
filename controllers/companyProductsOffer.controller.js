@@ -286,7 +286,7 @@ exports.getActiveOffersTitle = async (req, res) => {
                 res.status(500).send({errorMsg: err.sqlMessage || "Some error occured while creating the Product", errorCode: 503});
             }
             else{
-                res.status(200).send( {product_offers: data});
+                res.status(200).send( {product_offers_title: data});
             }
         });
     } catch (error) {
