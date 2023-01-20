@@ -1,7 +1,7 @@
 const sqlConnection = require("../database");
 
 const ProductsOffer = function(productsOffer) {
-    this.headerDesc = productsOffer.headerDesc,
+    this.headerImgPath = productsOffer.headerImgPath,
     this.description = productsOffer.description,
     this.validity = productsOffer.validity,
     this.categoryId = productsOffer.categoryId,
@@ -13,9 +13,9 @@ ProductsOffer.addProductsOffer =  ( productsOffer, next ) =>  new Promise(functi
   let productsOfferTitleInsertQuery = "";
   let productsOfferDetailInsertQuery = "";
 
-  productsOfferTitleInsertQuery = "INSERT INTO company_offer_title(header_desc, validity) VALUES (?,?)";
+  productsOfferTitleInsertQuery = "INSERT INTO company_offer_title(header_img_path, validity) VALUES (?,?)";
 
-  sqlConnection.promise().query(productsOfferTitleInsertQuery, [ productsOffer.headerDesc, productsOffer.validity ])
+  sqlConnection.promise().query(productsOfferTitleInsertQuery, [ productsOffer.headerImgPath, productsOffer.validity ])
   .then(res => {
     
       let dbQueries = new Array();
@@ -59,7 +59,7 @@ ProductsOffer.addProductsOffer =  ( productsOffer, next ) =>  new Promise(functi
     const productOfferTitleId = req.params.titleId;
     
     await new Promise(() => {
-      getProductOfferQuery = `SELECT title_id, header_desc, validity FROM company_offer_title WHERE title_id='${productOfferTitleId}'`;
+      getProductOfferQuery = `SELECT title_id, header_img_path, validity FROM company_offer_title WHERE title_id='${productOfferTitleId}'`;
       
       sqlConnection.query(getProductOfferQuery, (err, results) => {
         
@@ -82,7 +82,7 @@ ProductsOffer.addProductsOffer =  ( productsOffer, next ) =>  new Promise(functi
     const productOfferTitleId = req.params.productOfferTitleId;
     
     await new Promise(() => {
-      getProductOfferQuery = `SELECT company_product_offers.offer_id, company_offer_title.header_desc, company_offer_title.validity, company_product_offers.poster_path, company_product_offers.description, product_categories.name AS category FROM company_product_offers LEFT JOIN company_offer_title ON company_product_offers.title_id=company_offer_title.title_id LEFT JOIN product_categories ON product_categories.category_id=company_product_offers.category_id WHERE company_offer_title.title_id='${productOfferTitleId}'`;
+      getProductOfferQuery = `SELECT company_product_offers.offer_id, company_offer_title.header_img_path, company_offer_title.validity, company_product_offers.poster_path, company_product_offers.description, product_categories.name AS category FROM company_product_offers LEFT JOIN company_offer_title ON company_product_offers.title_id=company_offer_title.title_id LEFT JOIN product_categories ON product_categories.category_id=company_product_offers.category_id WHERE company_offer_title.title_id='${productOfferTitleId}'`;
       
       sqlConnection.query(getProductOfferQuery, (err, results) => {
         
@@ -101,7 +101,7 @@ ProductsOffer.addProductsOffer =  ( productsOffer, next ) =>  new Promise(functi
 
   ProductsOffer.updateTitleById = async (titleId, productFeatureData, result) => {
   
-    const { headerDesc, validity } = productFeatureData;
+    const { headerImgPath, validity } = productFeatureData;
     
     let selProductOfferQuery = `SELECT * FROM company_offer_title WHERE title_id='${titleId}'`;
 
@@ -116,8 +116,8 @@ ProductsOffer.addProductsOffer =  ( productsOffer, next ) =>  new Promise(functi
 
         let productFeatureUpdateQuery = "UPDATE company_offer_title SET ";
     
-        if(headerDesc !== undefined){
-          productFeatureUpdateQuery += `header_desc='${headerDesc}'`
+        if(headerImgPath !== undefined){
+          productFeatureUpdateQuery += `header_img_path='${headerImgPath}'`
         }
     
         if(validity !== undefined){
@@ -271,7 +271,7 @@ ProductsOffer.addProductsOffer =  ( productsOffer, next ) =>  new Promise(functi
     let getProductOfferQuery = "";
     
     await new Promise(() => {
-      getProductOfferQuery = `SELECT company_product_offers.offer_id, company_offer_title.title_id, company_offer_title.header_desc, company_offer_title.validity, company_product_offers.poster_path, company_product_offers.description, product_categories.name AS category FROM company_product_offers LEFT JOIN company_offer_title ON company_product_offers.title_id=company_offer_title.title_id LEFT JOIN product_categories ON product_categories.category_id=company_product_offers.category_id WHERE company_offer_title.validity >= CURRENT_DATE`;
+      getProductOfferQuery = `SELECT company_product_offers.offer_id, company_offer_title.title_id, company_offer_title.header_img_path, company_offer_title.validity, company_product_offers.poster_path, company_product_offers.description, product_categories.name AS category FROM company_product_offers LEFT JOIN company_offer_title ON company_product_offers.title_id=company_offer_title.title_id LEFT JOIN product_categories ON product_categories.category_id=company_product_offers.category_id WHERE company_offer_title.validity >= CURRENT_DATE`;
       
       sqlConnection.query(getProductOfferQuery, (err, results) => {
         

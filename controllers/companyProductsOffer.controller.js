@@ -111,7 +111,7 @@ exports.findOffersByTitle = async (req, res) => {
 }
 
 exports.updateOfferTitleById = async (req, res) => {
-    const {headerDesc, validity} = req.body;
+    const {headerImgPath, validity} = req.body;
     try {
     
         if (Object.keys(req.body).length === 0) {
@@ -120,9 +120,9 @@ exports.updateOfferTitleById = async (req, res) => {
             });
             return;
           }
-          else if(headerDesc !== undefined && headerDesc === "" )
+          else if(headerImgPath !== undefined && headerImgPath === "" )
           {
-              res.status(400).send({errorMsg: "'headerDesc' field cannot be empty", errorCode: 504});
+              res.status(400).send({errorMsg: "'headerImgPath' field cannot be empty", errorCode: 504});
               return;
           }
           else if(validity !== undefined && validity === "" )
