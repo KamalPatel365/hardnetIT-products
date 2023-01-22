@@ -134,7 +134,7 @@ Product.updateProductById = async (productId, productData, result) => {
 }
 
 Product.retrieveAllProduct = (productsReq, result) => {
-  const fetchAllProduct = "SELECT id, product_categories.name, company_product_brands.name, products.name, products.model, products.short_description, products.description, products.price, products.image FROM products LEFT JOIN company_product_brands ON products.brand_id=company_product_brands.brand_id LEFT JOIN product_categories ON products.category_id=product_categories.category_id";
+  const fetchAllProduct = "SELECT id, product_categories.name, product_categories.category_id, company_product_brands.brand_id, company_product_brands.name, products.name, products.model, products.short_description, products.description, products.price, products.image FROM products LEFT JOIN company_product_brands ON products.brand_id=company_product_brands.brand_id LEFT JOIN product_categories ON products.category_id=product_categories.category_id";
   sqlConnection.query(fetchAllProduct, (err, results) => {
     if(err)
     {
