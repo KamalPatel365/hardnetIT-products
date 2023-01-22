@@ -3,11 +3,20 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+// const sqlConnection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'hdIT',
+//     password: 'hardnetIT89##',
+//     database: 'hardnetit_cctv_data',
+//     multipleStatements: true
+// });
+
 const sqlConnection = mysql.createConnection({
-    host: 'localhost',
-    user: 'hdIT',
-    password: 'hardnetIT89##',
-    database: 'hardnetit_cctv_data',
+    host: 'bcvcki9mjvr7bufzyjts-mysql.services.clever-cloud.com',
+    port: '3306',
+    user: 'u0mbecun0xqpck34',
+    password: 'pOACWP1LlYQ50kCoPSO9',
+    database: 'bcvcki9mjvr7bufzyjts',
     multipleStatements: true
 });
 
