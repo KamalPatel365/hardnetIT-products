@@ -26,14 +26,17 @@ app.use( (req, res, next) => {
 
 // app.use('/users', userRoute);
 // app.use('/products', productRoute);
-require("./routes/product.routes.js")(app);
-require("./routes/productFeature.routes.js")(app);
+require("./routes/product.routes")(app);
+require("./routes/productFeature.routes")(app);
 require("./routes/productFeatureOffer.routes")(app);
 require("./routes/productFeatureDetail.routes")(app);
+require("./routes/productCategories.routes")(app);
+require("./routes/productBrands.routes")(app);
 require("./routes/companyProductsOffer.routes")(app);
 require("./routes/companyProductsSlider.routes")(app);
 require("./routes/companyProductsPartner.routes")(app);
 require("./routes/companyServices.routes")(app);
+require("./routes/contactUs.routes")(app);
 
 app.get('/', (req,res) => {
     res.sendStatus(200);
